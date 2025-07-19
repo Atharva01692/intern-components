@@ -1,0 +1,332 @@
+CardGrid.jsx-: 
+  
+import { useEffect } from 'react';
+import './CardGrid.css';
+
+const CardGrid = () => {
+  const cardData = [
+    {
+      icon: '🚀',
+      title: 'Innovation Hub',
+      description: 'Explore cutting-edge technologies and breakthrough innovations that shape the future of digital experiences.',
+      tag: 'Technology'
+    },
+    {
+      icon: '🎨',
+      title: 'Creative Studio',
+      description: 'Unleash your creativity with powerful design tools and inspiration from the global creative community.',
+      tag: 'Design'
+    },
+    {
+      icon: '📊',
+      title: 'Analytics Pro',
+      description: 'Transform raw data into actionable insights with advanced analytics and visualization tools.',
+      tag: 'Data'
+    },
+    {
+      icon: '🌟',
+      title: 'Premium Features',
+      description: 'Access exclusive premium features designed to enhance your productivity and workflow efficiency.',
+      tag: 'Premium'
+    },
+    {
+      icon: '🔒',
+      title: 'Security Shield',
+      description: 'Enterprise-grade security solutions to protect your data and maintain complete privacy control.',
+      tag: 'Security'
+    },
+    {
+      icon: '⚡',
+      title: 'Performance Boost',
+      description: 'Optimize your applications with lightning-fast performance and seamless user experiences.',
+      tag: 'Performance'
+    },
+    {
+      icon: '🌍',
+      title: 'Global Network',
+      description: 'Connect with users worldwide through our robust global infrastructure and content delivery.',
+      tag: 'Network'
+    },
+    {
+      icon: '🎯',
+      title: 'Goal Tracker',
+      description: 'Set, track, and achieve your objectives with intelligent goal management and progress insights.',
+      tag: 'Productivity'
+    },
+    {
+      icon: '💡',
+      title: 'Smart Solutions',
+      description: 'AI-powered recommendations and automated workflows to streamline your daily operations.',
+      tag: 'AI'
+    }
+  ];
+
+  useEffect(() => {
+    const initializeGrid = () => {
+      const cards = document.querySelectorAll('.card');
+      
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const rotateX = (y - centerY) / 10;
+          const rotateY = (centerX - x) / 10;
+          
+          card.style.transform = `scale(1.1) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+
+        card.addEventListener('click', () => {
+          card.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            card.style.transform = '';
+          }, 150);
+        });
+      });
+    };
+
+    initializeGrid();
+
+    const handleScroll = () => {
+      const cards = document.querySelectorAll('.card');
+      const scrolled = window.pageYOffset;
+      
+      cards.forEach((card, index) => {
+        const rate = scrolled * -0.1 * (index % 3 + 1);
+        card.style.transform = `translateY(${rate}px)`;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <div className="container">
+      <h1 className="title">Interactive Card Grid</h1>
+      <div className="grid" id="cardGrid">
+        {cardData.map((card, index) => (
+          <div className="card" key={index}>
+            <div className="card-icon">{card.icon}</div>
+            <h3 className="card-title">{card.title}</h3>
+            <p className="card-description">{card.description}</p>
+            <div className="card-footer">
+              <span className="card-tag">{card.tag}</span>
+              <span className="card-arrow">→</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default CardGrid;
+
+CardGrid.css-: * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(255, 0, 150, 0.1), 
+        rgba(0, 255, 255, 0.1),
+        rgba(255, 255, 0, 0.1),
+        rgba(150, 0, 255, 0.1)
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 20px;
+}
+
+.card:hover {
+    transform: scale(1.1) rotateX(5deg) rotateY(5deg);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:nth-child(even):hover {
+    transform: scale(1.1) rotateX(-5deg) rotateY(-5deg);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.4s ease;
+}
+
+.card:hover .card-icon {
+    transform: rotateY(360deg) scale(1.2);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.card:hover .card-title {
+    color: #4ecdc4;
+    text-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+}
+
+.card-description {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.card:hover .card-description {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.card-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-tag {
+    background: rgba(78, 205, 196, 0.2);
+    color: #4ecdc4;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.card:hover .card-tag {
+    background: rgba(78, 205, 196, 0.3);
+    transform: translateX(5px);
+}
+
+.card-arrow {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.card:hover .card-arrow {
+    color: #ffffff;
+    transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.card:nth-child(3n) {
+    animation: float 6s ease-in-out infinite;
+}
+
+.card:nth-child(3n+1) {
+    animation: float 6s ease-in-out infinite 2s;
+}
+
+.card:nth-child(3n+2) {
+    animation: float 6s ease-in-out infinite 4s;
+}
+
+
+App.jsx-: import CardGrid from './components/CardGrid';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App" style={{
+      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+      background: 'linear-gradient(135deg, #1e1e2e, #2d1b69, #1a1a2e)',
+      minHeight: '100vh',
+      padding: '2rem',
+      overflowX: 'hidden'
+    }}>
+      <CardGrid />
+    </div>
+  );
+}
+
+export default App;
