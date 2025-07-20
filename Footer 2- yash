@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expanding Cards Footer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+        }
+        
+        
+        .footer-cards {
+            background: #1a1a1a;
+            color: white;
+            padding: 4rem 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            height: 600px;
+            margin: 0 auto;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) !important;
+            background: #3a3a3a;
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #4dabf7;
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4dabf7;
+        }
+        
+        .card p {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card a {
+            color: #4dabf7;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .card a i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover a i {
+            transform: translateX(5px);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #4dabf7;
+        }
+        
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: #4dabf7;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    
+    
+    <footer class="footer-cards">
+        <div class="footer-container">
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Innovation</h3>
+                    <p>Discover our cutting-edge technologies and innovative solutions that drive business growth.</p>
+                    <a href="#">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <h3>Community</h3>
+                    <p>Join our thriving community of developers, designers, and tech enthusiasts.</p>
+                    <a href="#">Join now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-book"></i></div>
+                    <h3>Resources</h3>
+                    <p>Access our comprehensive library of tutorials, documentation, and learning materials.</p>
+                    <a href="#">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-headset"></i></div>
+                    <h3>Support</h3>
+                    <p>Our dedicated support team is available 24/7 to assist you with any questions.</p>
+                    <a href="#">Contact us <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>
+                    <a href="#" class="footer-logo">Yash</a>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">GDPR</a>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+           
+            gsap.registerPlugin(ScrollTrigger);
+            
+            
+            gsap.utils.toArray('.card').forEach((card, index) => {
+                gsap.to(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    ease: "back.out(1.7)"
+                });
+            });
+
+            gsap.from('.footer-bottom > div:first-child', {
+                scrollTrigger: {
+                    trigger: '.footer-bottom',
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                x: -50,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+            
+            gsap.from('.social-links a', {
+                scrollTrigger: {
+                    trigger: '.footer-bottom',
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                y: 20,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                delay: 0.3,
+                ease: "back.out(1.7)"
+            });
+            
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, {
+                        duration: 0.3,
+                        boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)',
+                        ease: 'power2.out'
+                    });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        duration: 0.3,
+                        boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)',
+                        ease: 'power2.out'
+                    });
+                });
+            });
+            
+            document.querySelectorAll('.footer-links a').forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    gsap.to(link, {
+                        duration: 0.2,
+                        color: '#4dabf7',
+                        ease: 'power2.out'
+                    });
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    gsap.to(link, {
+                        duration: 0.2,
+                        color: '#ccc',
+                        ease: 'power2.out'
+                    });
+                });
+            });
+            
+            document.querySelectorAll('.social-links a').forEach(icon => {
+                icon.addEventListener('mouseenter', () => {
+                    gsap.to(icon, {
+                        duration: 0.3,
+                        backgroundColor: '#4dabf7',
+                        y: -3,
+                        ease: 'power2.out'
+                    });
+                });
+                
+                icon.addEventListener('mouseleave', () => {
+                    gsap.to(icon, {
+                        duration: 0.3,
+                        backgroundColor: '#333',
+                        y: 0,
+                        ease: 'power2.out'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
